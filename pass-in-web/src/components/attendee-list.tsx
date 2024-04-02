@@ -59,10 +59,10 @@ export function AttendeeList() {
             </tbody>
             <tfoot>
                 <tr>
-                    <TableCell className="py-3 px-4 text-sm text-zinc-300" colSpan={3}>
+                    <TableCell colSpan={3}>
                         Mostrando 10 de 228 itens
                     </TableCell>
-                    <TableCell className="py-3 px-4 text-sm text-zinc-300 text-right" colSpan={3}>
+                    <TableCell  colSpan={3}>
                         <div className="inline-flex items-center gap-8">
                         <span>Página 1 de 23</span>
 
