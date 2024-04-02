@@ -2,6 +2,7 @@
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react"
 import { IconButton } from "./icon-button"
 import { Table } from "./table/table"
+import { TalbeHeader } from "./table/table-header"
 
 export function AttendeeList() {
     return (
@@ -18,14 +19,14 @@ export function AttendeeList() {
         <Table>
             <thead>
                 <tr className="border-b border-white/10">
-                    <th style={{width:48}} className="py-3 px-4 text-sm font-semibold text-left">
+                    <TalbeHeader style={{width:48}} >
                         <input type="checkbox" className="size-4 bg-black/20 rounded border border-white/10 " />
-                    </th>
-                    <th className="py-3 px-4 text-sm font-semibold text-left">Código</th>
-                    <th className="py-3 px-4 text-sm font-semibold text-left">Participantes</th>
-                    <th className="py-3 px-4 text-sm font-semibold text-left">Data de inscrição</th>
-                    <th className="py-3 px-4 text-sm font-semibold text-left">Data do check-in</th>
-                    <th style={{width:64}} className="py-3 px-4 text-sm font-semibold text-left"></th>
+                    </TalbeHeader>
+                    <TalbeHeader >Código</TalbeHeader>
+                    <TalbeHeader >Participantes</TalbeHeader>
+                    <TalbeHeader >Data de inscrição</TalbeHeader>
+                    <TalbeHeader >Data do check-in</TalbeHeader>
+                    <TalbeHeader style={{width:64}} ></TalbeHeader>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@ export function AttendeeList() {
                 <td className="py-3 px-4 text-sm text-zinc-300" >7 dias atrás</td>
                 <td className="py-3 px-4 text-sm text-zinc-300" >3 dias atrás</td>
                 <td className="py-3 px-4 text-sm text-zinc-300" >
-                    <IconButton transparent> //* Envia o valor transparente como true 
+                    <IconButton transparent> {/*//*? Envia o valor transparente como true */}
                         <MoreHorizontal className="size-4" />
                     </IconButton>
                     
