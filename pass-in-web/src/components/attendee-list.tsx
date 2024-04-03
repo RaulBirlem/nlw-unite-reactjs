@@ -45,8 +45,11 @@ export function AttendeeList() {
         const url = new URL('http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
 
         url.searchParams.set('pageIndex', String(page - 1))
-        url.searchParams.set('query','Anna')
+        if(search.length > 0) {
+           url.searchParams.set('query',search)
+        }
         // * searchParams add param na url
+
         fetch(url)
         .then(response => response.json()) //! converte response para json
         .then(data => {
@@ -54,13 +57,15 @@ export function AttendeeList() {
             setAttendees(data.attendees)
             setTotal(data.total)
         })
-    },[page])
+    },[page, search]) 
+    //observa page e search(input) altera para re-renderizar a página
 
 
 
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>){
         setSearch(event.target.value)
+        setPage(1)//return to page 1
     }
     
     function goToFirstPage() {
@@ -87,9 +92,14 @@ export function AttendeeList() {
             <h1 className="text-2xl font-bold">Participantes</h1>
             <div className="px-3 w-72 py-1.5 border border-white/10 rounded-lg flex items-center gap-3">
                 <Search className="size-4 text-esmerald-300"/> 
-                <input onChange={onSearchInputChanged} className="bg-transparent flex-1 outline-none border-0 p-0 text-sm " placeholder="Buscar participantes..." />
+                <input 
+                onChange={onSearchInputChanged}
+                className="bg-transparent flex-1 outline-none border-0 p-0 text-sm focus:ring-0" 
+                placeholder="Buscar participantes..." 
+                
+                />
             </div>
-            {search}
+           
         </div>
 
         <Table>
