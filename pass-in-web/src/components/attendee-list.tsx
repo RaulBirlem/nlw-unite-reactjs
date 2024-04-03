@@ -24,13 +24,16 @@ interface Attendee {
     checkedInAt: string | null
 }
 
+//URL STATE - armazena o estado do input do usuário na url
+
 
 export function AttendeeList() {
 
     const [search, setSearch] = useState('')
     
-    // estado para armazenar qual página o usuário está
-    const [page, setPage] = useState(1);
+    // estado para armazenar qual página o usuário está(trocado pelo url state)
+   // const [page, setPage] = useState(1);
+   const page = 1;
 
     const [total, setTotal] = useState(0)
     //* array de objetos do tipo Attendee
@@ -65,22 +68,32 @@ export function AttendeeList() {
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>){
         setSearch(event.target.value)
-        setPage(1)//return to page 1
+       //setPage(1)//return to page 1
     }
     
     function goToFirstPage() {
-        setPage(1)
+        //setPage(1)
     }
     function goToLastPage() {
-        setPage(totalPages)
+       // setPage(totalPages)
     }
 
     function goToNextPage() {
-        setPage(page + 1)
+        //setPage(page + 1)
+
+        const url = new URL(window.location.toString())
+        //armazena os parâmetros da url
+
+        url.searchParams.set('page', String(page+1))
+
+        window.history.pushState({},"",url)
+        //não faz redirecionamento, não re-renderiza a página completa
+
+
     }
 
     function goToPreviousPage() {
-        setPage(page - 1)
+        //setPage(page - 1)
     }
 
 
