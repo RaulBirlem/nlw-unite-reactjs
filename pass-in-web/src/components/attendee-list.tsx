@@ -29,10 +29,20 @@ interface Attendee {
 
 export function AttendeeList() {
 
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState(() => {
+        const url = new URL(window.location.toString())
+
+        if(url.searchParams.has('search')){
+            return url.searchParams.get('search') ?? ''
+        //se no link inicial tiver alguma busca
+        //acessa nessa página com a busca
+        }
+
+        return ''
+    })
     
     // estado para armazenar qual página o usuário está(trocado pelo url state)
-    const [page, setPage] = useState(()=>{
+    const [page, setPage] = useState(() => {
         const url = new URL(window.location.toString())
 
         if(url.searchParams.has('page')){
@@ -74,6 +84,21 @@ export function AttendeeList() {
     //observa page e search(input) altera para re-renderizar a página
 
 
+    //acessar a url com a busca inserida
+    function setCurrentSearch(search: string){
+        const url = new URL(window.location.toString())
+
+        url.searchParams.set('search',search)
+
+        window.history.pushState({},"", url)
+
+        setSearch(search)
+    }
+
+
+
+
+
     function setCurrentPage(page: number){
 
         const url = new URL(window.location.toString())
@@ -90,7 +115,7 @@ export function AttendeeList() {
 
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>){
-        setSearch(event.target.value)
+        setCurrentSearch(event.target.value)
         setCurrentPage(1)//return to page 1
     }
     
@@ -121,6 +146,7 @@ export function AttendeeList() {
                 <Search className="size-4 text-esmerald-300"/> 
                 <input 
                 onChange={onSearchInputChanged}
+                value={search}
                 className="bg-transparent flex-1 outline-none border-0 p-0 text-sm focus:ring-0" 
                 placeholder="Buscar participantes..." 
                 
