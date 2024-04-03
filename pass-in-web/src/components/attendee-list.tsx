@@ -32,8 +32,8 @@ export function AttendeeList() {
     const [search, setSearch] = useState('')
     
     // estado para armazenar qual página o usuário está(trocado pelo url state)
-   // const [page, setPage] = useState(1);
-   const page = 1;
+    const [page, setPage] = useState(1);
+  
 
     const [total, setTotal] = useState(0)
     //* array de objetos do tipo Attendee
@@ -69,11 +69,13 @@ export function AttendeeList() {
         const url = new URL(window.location.toString())
         //armazena os parâmetros da url
 
-        url.searchParams.set('page', String(page+1))
+        url.searchParams.set('page', String(page))
 
         window.history.pushState({},"",url)
         //não faz redirecionamento, não re-renderiza a página completa
 
+        setPage(page) 
+        //coloca o valor de page em um estado para poder renderizar e trazer novos dados das próximas páginas
     }
 
 
