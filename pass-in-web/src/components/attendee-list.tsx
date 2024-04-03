@@ -32,11 +32,12 @@ export function AttendeeList() {
     // estado para armazenar qual página o usuário está
     const [page, setPage] = useState(1);
 
-    //
+    const [total, setTotal] = useState(0)
+    //* array de objetos do tipo Attendee
     const [attendees, setAttendees] = useState<Attendee[]>([])
 
 
-    const totalPages = Math.ceil(attendees.length / 10);
+    const totalPages = Math.ceil(total / 10);
 
 
 
@@ -46,6 +47,7 @@ export function AttendeeList() {
         .then(data => {
             console.log(data)
             setAttendees(data.attendees)
+            setTotal(data.total)
         })
     },[page])
 
@@ -135,7 +137,7 @@ export function AttendeeList() {
             <tfoot>
                 <tr>
                     <TableCell  colSpan={3}>
-                        Mostrando 10 de {attendees.length} itens
+                        Mostrando 10 de {total} itens
                     </TableCell>
                     <TableCell  className="text-right"colSpan={3}>
                         <div className="inline-flex items-center gap-8">
