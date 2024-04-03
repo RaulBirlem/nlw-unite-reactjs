@@ -42,7 +42,7 @@ export function AttendeeList() {
 
 
     useEffect(() => {
-        fetch('http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
+        fetch(`http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees?pageIndex=${page-1}`)
         .then(response => response.json()) //! converte response para json
         .then(data => {
             console.log(data)
@@ -137,7 +137,7 @@ export function AttendeeList() {
             <tfoot>
                 <tr>
                     <TableCell  colSpan={3}>
-                        Mostrando 10 de {total} itens
+                        Mostrando {attendees.length} de {total} itens
                     </TableCell>
                     <TableCell  className="text-right"colSpan={3}>
                         <div className="inline-flex items-center gap-8">
