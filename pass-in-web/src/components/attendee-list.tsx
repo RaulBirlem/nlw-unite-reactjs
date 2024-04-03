@@ -32,7 +32,17 @@ export function AttendeeList() {
     const [search, setSearch] = useState('')
     
     // estado para armazenar qual página o usuário está(trocado pelo url state)
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(()=>{
+        const url = new URL(window.location.toString())
+
+        if(url.searchParams.has('page')){
+            return Number(url.searchParams.get('page'))
+        //se no link inicial tiver o número da página
+        //transforma de string para número e acessa nessa página
+        }
+
+        return 1
+    })
   
 
     const [total, setTotal] = useState(0)
