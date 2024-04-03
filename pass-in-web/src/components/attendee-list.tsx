@@ -64,22 +64,7 @@ export function AttendeeList() {
     //observa page e search(input) altera para re-renderizar a página
 
 
-
-
-    function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>){
-        setSearch(event.target.value)
-       //setPage(1)//return to page 1
-    }
-    
-    function goToFirstPage() {
-        //setPage(1)
-    }
-    function goToLastPage() {
-       // setPage(totalPages)
-    }
-
-    function goToNextPage() {
-        //setPage(page + 1)
+    function setCurrentPage(page: number){
 
         const url = new URL(window.location.toString())
         //armazena os parâmetros da url
@@ -89,11 +74,28 @@ export function AttendeeList() {
         window.history.pushState({},"",url)
         //não faz redirecionamento, não re-renderiza a página completa
 
+    }
+
+
+    function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>){
+        setSearch(event.target.value)
+        setCurrentPage(1)//return to page 1
+    }
+    
+    function goToFirstPage() {
+        setCurrentPage(1)
+    }
+    function goToLastPage() {
+        setCurrentPage(totalPages)
+    }
+
+    function goToNextPage() {
+        setCurrentPage(page + 1)
 
     }
 
     function goToPreviousPage() {
-        //setPage(page - 1)
+        setCurrentPage(page - 1)
     }
 
 
